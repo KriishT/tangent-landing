@@ -268,44 +268,6 @@
       0 8px 40px -8px rgba(98, 104, 232, 0.45),
       0 24px 60px -20px rgba(0, 0, 0, 0.5);
   }
-
-  /* Demo viewport — fits header + stage + phase in one screen */
-  .demo-section {
-    height: 100svh;
-    max-height: 100svh;
-  }
-
-  .demo-stage {
-    height: min(38vh, calc(100svh - 13.5rem));
-    min-height: 10.5rem;
-    max-height: 28rem;
-  }
-
-  @media (min-width: 640px) {
-    .demo-stage {
-      height: min(42vh, calc(100svh - 14.5rem));
-      min-height: 12rem;
-      max-height: 30rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .demo-stage {
-      height: min(46vh, calc(100svh - 15rem));
-      max-height: 32rem;
-    }
-  }
-
-  @media (max-height: 700px) {
-    .demo-stage {
-      height: min(36vh, calc(100svh - 12rem));
-      min-height: 9.5rem;
-    }
-
-    .demo-section-compact-header h2 {
-      font-size: 1.5rem;
-    }
-  }
 }
 
 

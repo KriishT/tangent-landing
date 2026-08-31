@@ -10,13 +10,13 @@ export function VoiceHud({ visible, releasing }: VoiceHudProps) {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="absolute inset-x-0 top-[24%] z-20 flex justify-center px-3 sm:top-[28%] sm:px-4"
+          className="absolute inset-x-0 top-[32%] z-20 flex justify-center px-4"
           initial={{ opacity: 0, y: -20, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -12, scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 26 }}
         >
-          <div className="flex items-center gap-2.5 rounded-xl border border-app-stroke bg-app-surface/95 px-3 py-2 shadow-lg backdrop-blur-md sm:gap-4 sm:rounded-2xl sm:px-5 sm:py-3.5">
+          <div className="flex items-center gap-4 rounded-2xl border border-app-stroke bg-app-surface/95 px-5 py-3.5 shadow-lg backdrop-blur-md">
             <div className="relative flex h-9 w-9 shrink-0 items-center justify-center">
               <motion.span
                 className="absolute inset-0 rounded-full border-2 border-app-accent/40"
@@ -35,16 +35,16 @@ export function VoiceHud({ visible, releasing }: VoiceHudProps) {
               />
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-app-heading sm:text-base">
+              <p className="text-base font-semibold text-app-heading">
                 {releasing ? "Saving…" : "Listening"}
               </p>
-              <p className="text-[11px] text-app-muted sm:text-xs">
+              <p className="text-xs text-app-muted">
                 {releasing ? "On-device transcription" : "Hold hotkey · speak · release to save"}
               </p>
             </div>
             {!releasing && (
               <motion.div
-                className="hidden items-end gap-0.5 sm:flex"
+                className="flex items-end gap-0.5"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >

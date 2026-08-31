@@ -36,7 +36,7 @@ export function PhaseIndicator({ phase }: { phase: string }) {
   const activeIdx = PHASES.findIndex((p) => p.id === active);
 
   return (
-    <div className="mt-3 flex items-center justify-center gap-1.5 sm:mt-4 sm:gap-2">
+    <div className="mt-6 flex items-center justify-center gap-2 sm:mt-8 sm:gap-3">
       {PHASES.map((p, i) => {
         const isActive = p.id === active;
         const isPast = i < activeIdx;

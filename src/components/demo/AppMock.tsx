@@ -27,7 +27,7 @@ export function AppWindow({
 }) {
   return (
     <div className="demo-window-shell flex h-full flex-col overflow-hidden rounded-2xl border border-app-stroke bg-app-surface lg:rounded-3xl">
-      <div className="flex shrink-0 items-center justify-between border-b border-app-stroke bg-app-surface-raised px-3 py-2 sm:px-4 sm:py-2.5">
+      <div className="flex items-center justify-between border-b border-app-stroke bg-app-surface-raised px-4 py-2.5">
         <div className="flex gap-2">
           <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
           <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
@@ -40,21 +40,21 @@ export function AppWindow({
           <span>×</span>
         </div>
       </div>
-      <div className="flex h-full min-h-0 flex-1 flex-col">{children}</div>
+      <div className="flex min-h-0 flex-1 flex-col">{children}</div>
     </div>
   );
 }
 
 function Sidebar({ active }: { active: AppView }) {
   return (
-    <aside className="flex w-12 shrink-0 flex-col border-r border-app-stroke bg-app-surface py-3 sm:w-[168px] sm:py-5">
+    <aside className="flex w-[168px] shrink-0 flex-col border-r border-app-stroke bg-app-surface py-5">
       <div className="mb-6 flex items-center gap-2.5 px-3 sm:px-4">
         <TangentMark size={32} />
-        <span className="hidden font-sans text-[15px] font-bold tracking-tight text-app-heading sm:inline">
+        <span className="font-sans text-[15px] font-bold tracking-tight text-app-heading">
           Tangent
         </span>
       </div>
-      <nav className="flex flex-1 flex-col gap-0.5 px-1.5 sm:px-2">
+      <nav className="flex flex-1 flex-col gap-0.5 px-2">
         {NAV.map((item) => {
           const showActive =
             (active === "triage" && item.id === "triage") ||
@@ -62,22 +62,22 @@ function Sidebar({ active }: { active: AppView }) {
           return (
             <div
               key={item.id}
-              className={`flex items-center gap-2 rounded-r-md border-l-2 py-2 pl-2 pr-2 text-[11px] font-medium sm:pl-2.5 sm:text-[13px] ${
+              className={`flex items-center gap-2 rounded-r-md border-l-2 py-2 pl-2.5 pr-2 text-[13px] font-medium ${
                 showActive
                   ? "border-app-accent bg-app-surface-muted text-app-heading"
                   : "border-transparent text-app-muted"
               }`}
             >
-              <item.icon className="mx-auto h-4 w-4 shrink-0 sm:mx-0" />
-              <span className="hidden sm:inline">{item.label}</span>
+              <item.icon className="h-4 w-4 shrink-0" />
+              <span>{item.label}</span>
             </div>
           );
         })}
       </nav>
       <div className="mx-2 mt-auto rounded-md border border-app-stroke bg-app-surface-muted px-2 py-2">
-        <div className="flex items-center justify-center gap-1.5 text-[11px] text-app-muted sm:justify-start">
+        <div className="flex items-center gap-1.5 text-[11px] text-app-muted">
           <Moon className="h-3.5 w-3.5" />
-          <span className="hidden sm:inline">Dark</span>
+          <span>Dark</span>
         </div>
       </div>
     </aside>
@@ -129,7 +129,7 @@ export function TriageView({
   sorted: boolean;
 }) {
   return (
-    <div className="flex-1 overflow-hidden overflow-y-auto p-3 sm:p-5 lg:p-6">
+    <div className="flex-1 overflow-hidden p-4 sm:p-7">
       <h2 className="text-xl font-semibold text-app-heading sm:text-2xl">Triage</h2>
       <p className="mt-1 text-[11px] text-app-muted sm:text-xs">
         {showCard ? "1 parked" : "0 parked"} · hold{" "}
@@ -229,7 +229,7 @@ export function BoardView({ showCard }: { showCard: boolean }) {
   ];
 
   return (
-    <div className="flex-1 overflow-hidden overflow-y-auto p-3 sm:p-5 lg:p-6">
+    <div className="flex-1 overflow-hidden p-4 sm:p-7">
       <h2 className="text-xl font-semibold text-app-heading sm:text-2xl">Priority board</h2>
       <p className="mt-1 text-[11px] text-app-muted sm:text-xs">
         {showCard ? "1 active" : "0 active"} · 0 done
@@ -285,7 +285,7 @@ export function AppMock({
 }) {
   return (
     <AppWindow>
-      <div className="flex h-full min-h-0 flex-1 bg-app-canvas">
+      <div className="flex h-full min-h-[480px] bg-app-canvas">
         <Sidebar active={view} />
         {view === "triage" ? (
           <TriageView
@@ -306,7 +306,7 @@ export function DesktopNotification({ visible }: { visible: boolean }) {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="absolute right-2 top-2 z-40 w-[min(72vw,220px)] rounded-lg border border-app-stroke bg-app-surface p-2.5 shadow-2xl sm:right-3 sm:top-3 sm:w-[260px] sm:rounded-xl sm:p-3 lg:w-[280px]"
+          className="absolute right-3 top-3 z-40 w-[260px] rounded-xl border border-app-stroke bg-app-surface p-4 shadow-2xl sm:right-5 sm:top-5 sm:w-[300px]"
           initial={{ opacity: 0, x: 80, y: -20, scale: 0.9 }}
           animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
           exit={{ opacity: 0, x: 40, scale: 0.95 }}

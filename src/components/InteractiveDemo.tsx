@@ -21,6 +21,7 @@ import {
 } from "./demo/AppMock";
 
 import { DemoAmbient, HotkeyRipple, PhaseIndicator } from "./demo/DemoStage";
+import { DemoScaleFrame } from "./demo/DemoScaleFrame";
 import { VoiceHud } from "./demo/VoiceHud";
 
 
@@ -87,7 +88,7 @@ function MockEditor({ showCaret, dimmed }: { showCaret: boolean; dimmed?: boolea
 
     <motion.div
 
-      className="flex h-full min-h-0 font-mono text-[10px] leading-relaxed sm:text-xs lg:text-sm"
+      className="flex h-full min-h-[480px] font-mono text-sm leading-relaxed lg:text-[15px]"
 
       animate={{ opacity: dimmed ? 0.45 : 1 }}
 
@@ -95,11 +96,11 @@ function MockEditor({ showCaret, dimmed }: { showCaret: boolean; dimmed?: boolea
 
     >
 
-      <div className="select-none border-r border-app-stroke py-3 pr-2 pl-3 text-right text-app-faint sm:py-5 sm:pr-4 sm:pl-5">
+      <div className="select-none border-r border-app-stroke py-6 pr-4 pl-5 text-right text-app-faint">
 
-        {Array.from({ length: 8 }, (_, i) => (
+        {Array.from({ length: 12 }, (_, i) => (
 
-          <div key={i + 1} className="leading-5 sm:leading-7">
+          <div key={i + 1} className="leading-7">
 
             {i + 1}
 
@@ -109,7 +110,7 @@ function MockEditor({ showCaret, dimmed }: { showCaret: boolean; dimmed?: boolea
 
       </div>
 
-      <div className="flex-1 overflow-hidden py-3 pr-3 sm:py-5 sm:pr-8">
+      <div className="flex-1 overflow-hidden py-6 pr-8">
 
         <div className="text-app-muted">
 
@@ -217,7 +218,7 @@ function CaptureBar({
 
         <motion.div
 
-          className="absolute inset-x-3 top-[26%] z-20 sm:inset-x-6 sm:top-[30%] lg:inset-x-10"
+          className="absolute inset-x-4 top-[32%] z-20 sm:inset-x-10 lg:inset-x-14"
 
           initial={{ opacity: 0, y: -40, scale: 0.88 }}
 
@@ -231,7 +232,7 @@ function CaptureBar({
 
           <motion.div
 
-            className={`flex items-center gap-2 rounded-xl border border-app-stroke border-t-[3px] border-t-app-accent bg-app-surface/98 px-3 py-2 backdrop-blur-md sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 ${
+            className={`flex items-center gap-3 rounded-2xl border border-app-stroke border-t-[3px] border-t-app-accent bg-app-surface/98 px-4 py-3 backdrop-blur-md sm:px-5 sm:py-3.5 ${
 
               glowing ? "capture-bar-glow" : ""
 
@@ -253,7 +254,7 @@ function CaptureBar({
 
             />
 
-            <span className="min-w-0 flex-1 font-sans text-xs text-app-heading sm:text-sm lg:text-base">
+            <span className="min-w-0 flex-1 font-sans text-sm text-app-heading sm:text-base lg:text-lg">
 
               {text}
 
@@ -473,7 +474,7 @@ function LogoReveal({ visible }: { visible: boolean }) {
 
           <motion.div
 
-            className="absolute h-32 w-32 rounded-full border border-app-accent/20 sm:h-48 sm:w-48"
+            className="absolute h-48 w-48 rounded-full border border-app-accent/20"
 
             initial={{ scale: 0, opacity: 0.8 }}
 
@@ -493,14 +494,13 @@ function LogoReveal({ visible }: { visible: boolean }) {
 
           >
 
-            <TangentMark size={56} className="sm:hidden" />
-            <TangentMark size={72} className="hidden sm:block" />
+            <TangentMark size={72} />
 
           </motion.div>
 
           <motion.p
 
-            className="mt-3 font-sans text-2xl font-bold text-app-heading sm:mt-5 sm:text-3xl"
+            className="mt-5 font-sans text-3xl font-bold text-app-heading"
 
             initial={{ opacity: 0, y: 12 }}
 
@@ -744,7 +744,7 @@ export function InteractiveDemo() {
 
       ref={containerRef}
 
-      className="demo-section relative flex snap-start snap-always flex-col overflow-hidden px-4 pb-3 pt-20 sm:px-6 sm:pb-4 sm:pt-24 lg:px-8"
+      className="relative flex min-h-screen snap-start snap-always flex-col px-4 pb-10 pt-24 sm:px-6 lg:px-8"
 
     >
 
@@ -752,19 +752,19 @@ export function InteractiveDemo() {
 
 
 
-      <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col min-h-0">
 
-        <div className="demo-section-compact-header mb-2 flex shrink-0 items-end justify-between gap-3 sm:mb-3">
+        <div className="mb-4 flex shrink-0 items-end justify-between gap-4 sm:mb-6">
 
           <div>
 
-            <h2 className="font-display text-2xl tracking-tight text-ink sm:text-3xl lg:text-4xl">
+            <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl lg:text-5xl">
 
               See it in action
 
             </h2>
 
-            <p className="mt-1 text-xs text-muted sm:mt-2 sm:text-sm">
+            <p className="mt-2 text-sm text-muted sm:text-base">
 
               Hold the hotkey and speak — or type. Capture → triage → resurface.
 
@@ -780,7 +780,7 @@ export function InteractiveDemo() {
 
               onClick={handleReplay}
 
-              className="flex shrink-0 items-center gap-1.5 rounded-xl border border-border bg-surface/80 px-3 py-2 text-xs text-muted backdrop-blur-sm transition-colors hover:bg-surface hover:text-ink sm:px-4 sm:py-2.5 sm:text-sm"
+              className="flex shrink-0 items-center gap-1.5 rounded-xl border border-border bg-surface/80 px-4 py-2.5 text-xs text-muted backdrop-blur-sm transition-colors hover:bg-surface hover:text-ink sm:text-sm"
 
               aria-label="Replay demo"
 
@@ -798,37 +798,29 @@ export function InteractiveDemo() {
 
 
 
-        <div className="relative flex min-h-0 flex-1 items-center justify-center">
+        <DemoScaleFrame>
 
-          <div
+          <div className="relative h-full w-full" style={{ perspective: 1400 }}>
 
-            className="relative w-full max-w-5xl min-h-0"
-
-            style={{ perspective: 1400 }}
-
-          >
-
-            <div className="relative">
-
-              <HotkeyRipple visible={showHotkey} />
+            <HotkeyRipple visible={showHotkey} />
 
 
 
-              {reduced ? (
+            {reduced ? (
 
-                <div className="demo-stage relative w-full">
+              <div className="relative h-full w-full">
 
-                  <AppMock view="board" showTriageCard triageSelected sorted boardCard />
+                <AppMock view="board" showTriageCard triageSelected sorted boardCard />
 
-                  <DesktopNotification visible />
+                <DesktopNotification visible />
 
-                </div>
+              </div>
 
-              ) : (
+            ) : (
 
-                <div key={cycle} className="demo-stage relative w-full">
+              <div key={cycle} className="relative h-full w-full">
 
-                  <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait">
 
                     {inEditor && !showLogoScene && (
 
@@ -852,7 +844,7 @@ export function InteractiveDemo() {
 
                         <AppWindow title="retry.ts — VS Code">
 
-                          <div className="relative h-full min-h-0 overflow-hidden bg-app-canvas">
+                          <div className="relative min-h-[480px] bg-app-canvas">
 
                             <MockEditor showCaret={showCaret} dimmed={editorDimmed} />
 
@@ -948,7 +940,7 @@ export function InteractiveDemo() {
 
                         <AppWindow>
 
-                          <div className="relative h-full min-h-0 w-full">
+                          <div className="relative min-h-[480px] w-full">
 
                             <LogoReveal visible />
 
@@ -960,25 +952,19 @@ export function InteractiveDemo() {
 
                     )}
 
-                  </AnimatePresence>
+                </AnimatePresence>
 
-                </div>
+              </div>
 
-              )}
-
-            </div>
+            )}
 
           </div>
 
-        </div>
+        </DemoScaleFrame>
 
 
 
-        {!reduced && (
-          <div className="shrink-0">
-            <PhaseIndicator phase={phase} />
-          </div>
-        )}
+        {!reduced && <PhaseIndicator phase={phase} />}
 
       </div>
 
