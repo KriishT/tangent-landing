@@ -744,7 +744,7 @@ export function InteractiveDemo() {
 
       ref={containerRef}
 
-      className="relative flex min-h-screen snap-start snap-always flex-col px-4 pb-10 pt-24 sm:px-6 lg:px-8"
+      className="relative h-svh max-h-svh snap-start snap-always overflow-hidden"
 
     >
 
@@ -752,75 +752,79 @@ export function InteractiveDemo() {
 
 
 
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col min-h-0">
+      <div className="relative z-10 flex h-full min-h-0 w-full flex-col pt-16 pb-3 sm:pt-20 sm:pb-4">
 
-        <div className="mb-4 flex shrink-0 items-end justify-between gap-4 sm:mb-6">
+        <div className="mx-auto flex h-full min-h-0 w-full max-w-6xl flex-1 px-4 sm:px-6">
 
-          <div>
+          <DemoScaleFrame>
 
-            <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl lg:text-5xl">
+            <div className="flex h-[700px] w-[1024px] flex-col">
 
-              See it in action
+              <div className="mb-4 flex shrink-0 items-end justify-between gap-4">
 
-            </h2>
+                <div>
 
-            <p className="mt-2 text-sm text-muted sm:text-base">
+                  <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl lg:text-5xl">
 
-              Hold the hotkey and speak — or type. Capture → triage → resurface.
+                    See it in action
 
-            </p>
+                  </h2>
 
-          </div>
+                  <p className="mt-2 text-sm text-muted sm:text-base">
 
-          {!reduced && (
+                    Hold the hotkey and speak — or type. Capture → triage → resurface.
 
-            <button
+                  </p>
 
-              type="button"
+                </div>
 
-              onClick={handleReplay}
+                {!reduced && (
 
-              className="flex shrink-0 items-center gap-1.5 rounded-xl border border-border bg-surface/80 px-4 py-2.5 text-xs text-muted backdrop-blur-sm transition-colors hover:bg-surface hover:text-ink sm:text-sm"
+                  <button
 
-              aria-label="Replay demo"
+                    type="button"
 
-            >
+                    onClick={handleReplay}
 
-              <RotateCcw className="h-4 w-4" />
+                    className="flex shrink-0 items-center gap-1.5 rounded-xl border border-border bg-surface/80 px-4 py-2.5 text-xs text-muted backdrop-blur-sm transition-colors hover:bg-surface hover:text-ink sm:text-sm"
 
-              Replay
+                    aria-label="Replay demo"
 
-            </button>
+                  >
 
-          )}
+                    <RotateCcw className="h-4 w-4" />
 
-        </div>
+                    Replay
 
+                  </button>
 
-
-        <DemoScaleFrame>
-
-          <div className="relative h-full w-full" style={{ perspective: 1400 }}>
-
-            <HotkeyRipple visible={showHotkey} />
-
-
-
-            {reduced ? (
-
-              <div className="relative h-full w-full">
-
-                <AppMock view="board" showTriageCard triageSelected sorted boardCard />
-
-                <DesktopNotification visible />
+                )}
 
               </div>
 
-            ) : (
 
-              <div key={cycle} className="relative h-full w-full">
 
-                <AnimatePresence mode="wait">
+              <div className="relative h-[540px] shrink-0" style={{ perspective: 1400 }}>
+
+                <HotkeyRipple visible={showHotkey} />
+
+
+
+                {reduced ? (
+
+                  <div className="relative h-full w-full">
+
+                    <AppMock view="board" showTriageCard triageSelected sorted boardCard />
+
+                    <DesktopNotification visible />
+
+                  </div>
+
+                ) : (
+
+                  <div key={cycle} className="relative h-full w-full">
+
+                    <AnimatePresence mode="wait">
 
                     {inEditor && !showLogoScene && (
 
@@ -954,17 +958,29 @@ export function InteractiveDemo() {
 
                 </AnimatePresence>
 
+                  </div>
+
+                )}
+
               </div>
 
-            )}
-
-          </div>
-
-        </DemoScaleFrame>
 
 
+              {!reduced && (
 
-        {!reduced && <PhaseIndicator phase={phase} />}
+                <div className="flex shrink-0 items-end justify-center pt-3">
+
+                  <PhaseIndicator phase={phase} />
+
+                </div>
+
+              )}
+
+            </div>
+
+          </DemoScaleFrame>
+
+        </div>
 
       </div>
 
