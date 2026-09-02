@@ -13,7 +13,7 @@ export function SectionGroup({
   return (
     <section
       id={id}
-      className={`flex min-h-screen snap-start snap-always flex-col justify-center px-5 py-20 sm:px-6 sm:py-24 ${className}`}
+      className={`flex min-h-screen snap-start snap-always flex-col justify-center px-5 py-20 sm:px-6 sm:py-24 landing-section-below-fold ${className}`}
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 lg:gap-16">
         {children}

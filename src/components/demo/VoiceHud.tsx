@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "../../lib/motion";
 
 type VoiceHudProps = {
   visible: boolean;
@@ -18,21 +18,9 @@ export function VoiceHud({ visible, releasing }: VoiceHudProps) {
         >
           <div className="flex items-center gap-4 rounded-2xl border border-app-stroke bg-app-surface/95 px-5 py-3.5 shadow-lg backdrop-blur-md">
             <div className="relative flex h-9 w-9 shrink-0 items-center justify-center">
-              <motion.span
-                className="absolute inset-0 rounded-full border-2 border-app-accent/40"
-                animate={{ scale: [1, 1.8], opacity: [0.6, 0] }}
-                transition={{ duration: 1.4, repeat: Infinity, ease: "easeOut" }}
-              />
-              <motion.span
-                className="absolute inset-0 rounded-full border-2 border-app-accent/30"
-                animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
-                transition={{ duration: 1.4, repeat: Infinity, ease: "easeOut", delay: 0.45 }}
-              />
-              <motion.span
-                className="relative z-10 h-2.5 w-2.5 rounded-full bg-app-accent"
-                animate={{ scale: [1, 1.15, 1] }}
-                transition={{ duration: 0.9, repeat: Infinity }}
-              />
+              <span className="voice-ring absolute inset-0 rounded-full border-2 border-app-accent/40" />
+              <span className="voice-ring-delayed absolute inset-0 rounded-full border-2 border-app-accent/30" />
+              <span className="voice-mic-dot relative z-10 h-2.5 w-2.5 rounded-full bg-app-accent" />
             </div>
             <div className="min-w-0">
               <p className="text-base font-semibold text-app-heading">
@@ -43,24 +31,18 @@ export function VoiceHud({ visible, releasing }: VoiceHudProps) {
               </p>
             </div>
             {!releasing && (
-              <motion.div
-                className="flex items-end gap-0.5"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
+              <div className="flex items-end gap-0.5">
                 {[0.4, 0.7, 1, 0.6, 0.9, 0.5, 0.8].map((h, i) => (
-                  <motion.span
+                  <span
                     key={i}
-                    className="w-1 rounded-full bg-app-accent"
-                    animate={{ height: [4, h * 16, 4] }}
-                    transition={{
-                      duration: 0.5 + (i % 3) * 0.1,
-                      repeat: Infinity,
-                      delay: i * 0.07,
+                    className="w-1 rounded-full bg-app-accent voice-bar"
+                    style={{
+                      animation: `voice-bar-dance ${0.5 + (i % 3) * 0.1}s ease-in-out ${i * 0.07}s infinite`,
+                      ["--bar-peak" as string]: `${h * 16}px`,
                     }}
                   />
                 ))}
-              </motion.div>
+              </div>
             )}
           </div>
         </motion.div>

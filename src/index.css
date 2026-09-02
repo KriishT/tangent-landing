@@ -247,6 +247,128 @@
       transparent 70%
     );
     filter: blur(40px);
+    will-change: transform, opacity;
+    animation: demo-ambient-pulse 5s ease-in-out infinite;
+  }
+
+  @keyframes demo-ambient-pulse {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: translate3d(-50%, -50%, 0) scale(0.9);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translate3d(-50%, -50%, 0) scale(1.08);
+    }
+  }
+
+  @keyframes phase-dot-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.35);
+    }
+  }
+
+  .phase-dot-active {
+    animation: phase-dot-pulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes voice-ring-pulse {
+    0% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+  }
+
+  .voice-ring {
+    animation: voice-ring-pulse 1.4s ease-out infinite;
+  }
+
+  .voice-ring-delayed {
+    animation: voice-ring-pulse 1.4s ease-out 0.45s infinite;
+  }
+
+  @keyframes voice-mic-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+  }
+
+  .voice-mic-dot {
+    animation: voice-mic-pulse 0.9s ease-in-out infinite;
+  }
+
+  @keyframes voice-bar-dance {
+    0%,
+    100% {
+      height: 4px;
+    }
+    50% {
+      height: var(--bar-peak, 12px);
+    }
+  }
+
+  .voice-bar {
+    height: 4px;
+    will-change: height;
+  }
+
+  @keyframes capture-dot-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .capture-dot-pulse {
+    animation: capture-dot-pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes notify-ring-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+  }
+
+  .notify-ring-pulse {
+    animation: notify-ring-pulse 1.5s ease-in-out infinite;
+  }
+
+  .demo-scene-layer {
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    contain: layout style paint;
+  }
+
+  .demo-stage-root {
+    contain: layout style;
+    isolation: isolate;
+  }
+
+  .landing-section-below-fold {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
   }
 
   .demo-grid {
@@ -267,6 +389,20 @@
       0 0 0 1px rgba(98, 104, 232, 0.3),
       0 8px 40px -8px rgba(98, 104, 232, 0.45),
       0 24px 60px -20px rgba(0, 0, 0, 0.5);
+  }
+
+  @keyframes capture-bar-glow-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.01);
+    }
+  }
+
+  .capture-bar-glow-pulse {
+    animation: capture-bar-glow-pulse 0.6s ease-in-out;
   }
 }
 

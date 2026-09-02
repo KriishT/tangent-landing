@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "../lib/motion";
 import { Download, Apple } from "lucide-react";
 import { useReducedMotion } from "../hooks/useTheme";
 import {

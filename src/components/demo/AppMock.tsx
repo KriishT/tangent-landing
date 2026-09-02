@@ -1,4 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { memo } from "react";
+import { motion, AnimatePresence } from "../../lib/motion";
 import {
   Crosshair,
   LayoutGrid,
@@ -270,7 +271,7 @@ export function BoardView({ showCard }: { showCard: boolean }) {
   );
 }
 
-export function AppMock({
+export const AppMock = memo(function AppMock({
   view,
   showTriageCard,
   triageSelected,
@@ -299,7 +300,7 @@ export function AppMock({
       </div>
     </AppWindow>
   );
-}
+});
 
 export function DesktopNotification({ visible }: { visible: boolean }) {
   return (
@@ -312,11 +313,7 @@ export function DesktopNotification({ visible }: { visible: boolean }) {
           exit={{ opacity: 0, x: 40, scale: 0.95 }}
           transition={{ type: "spring", stiffness: 340, damping: 24 }}
         >
-          <motion.div
-            className="absolute -left-1 top-6 h-3 w-3 rounded-full bg-app-accent"
-            animate={{ scale: [1, 1.8, 1], opacity: [1, 0, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
+          <span className="notify-ring-pulse absolute -left-1 top-6 h-3 w-3 rounded-full bg-app-accent" />
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-center gap-1.5">
               <TangentMark size={20} />

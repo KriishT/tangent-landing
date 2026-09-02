@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "../lib/motion";
 import { Brain, Zap, MapPin } from "lucide-react";
 import { useReducedMotion } from "../hooks/useTheme";
 import { IconBox } from "./IconBox";

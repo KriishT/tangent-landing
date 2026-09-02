@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -72,23 +71,22 @@ export function FAQ() {
                   />
                 </button>
               </h3>
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    id={`faq-panel-${i}`}
-                    role="region"
-                    aria-labelledby={`faq-btn-${i}`}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <p className="px-4 pb-3 text-sm leading-relaxed text-muted sm:px-5 sm:pb-4">
-                      {faq.a}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div
+                id={`faq-panel-${i}`}
+                role="region"
+                aria-labelledby={`faq-btn-${i}`}
+                className="grid transition-[grid-template-rows,opacity] duration-200 ease-out"
+                style={{
+                  gridTemplateRows: isOpen ? "1fr" : "0fr",
+                  opacity: isOpen ? 1 : 0,
+                }}
+              >
+                <div className="overflow-hidden">
+                  <p className="px-4 pb-3 text-sm leading-relaxed text-muted sm:px-5 sm:pb-4">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
             </div>
           );
         })}

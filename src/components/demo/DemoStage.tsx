@@ -1,4 +1,5 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { memo } from "react";
+import { AnimatePresence, motion } from "../../lib/motion";
 
 const PHASES = [
   { id: "capture", label: "Capture" },
@@ -31,7 +32,7 @@ function phaseGroup(phase: string): PhaseGroup {
   return "notify";
 }
 
-export function PhaseIndicator({ phase }: { phase: string }) {
+export const PhaseIndicator = memo(function PhaseIndicator({ phase }: { phase: string }) {
   const active = phaseGroup(phase);
   const activeIdx = PHASES.findIndex((p) => p.id === active);
 
@@ -42,16 +43,14 @@ export function PhaseIndicator({ phase }: { phase: string }) {
         const isPast = i < activeIdx;
         return (
           <div key={p.id} className="flex items-center gap-2 sm:gap-3">
-            <motion.div
-              className="flex items-center gap-2"
-              animate={{ opacity: isActive ? 1 : isPast ? 0.55 : 0.3 }}
+            <div
+              className="flex items-center gap-2 transition-opacity duration-300"
+              style={{ opacity: isActive ? 1 : isPast ? 0.55 : 0.3 }}
             >
-              <motion.span
+              <span
                 className={`h-2 w-2 rounded-full sm:h-2.5 sm:w-2.5 ${
-                  isActive ? "bg-accent" : isPast ? "bg-accent/50" : "bg-border"
+                  isActive ? "bg-accent phase-dot-active" : isPast ? "bg-accent/50" : "bg-border"
                 }`}
-                animate={isActive ? { scale: [1, 1.35, 1] } : { scale: 1 }}
-                transition={{ duration: 1.2, repeat: isActive ? Infinity : 0 }}
               />
               <span
                 className={`hidden text-xs font-medium sm:inline ${
@@ -60,14 +59,12 @@ export function PhaseIndicator({ phase }: { phase: string }) {
               >
                 {p.label}
               </span>
-            </motion.div>
+            </div>
             {i < PHASES.length - 1 && (
               <div className="relative h-px w-6 bg-border sm:w-10">
-                <motion.div
-                  className="absolute inset-y-0 left-0 bg-accent"
-                  initial={{ width: "0%" }}
-                  animate={{ width: i < activeIdx ? "100%" : "0%" }}
-                  transition={{ duration: 0.4 }}
+                <div
+                  className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-500 ease-out"
+                  style={{ width: i < activeIdx ? "100%" : "0%" }}
                 />
               </div>
             )}
@@ -76,16 +73,12 @@ export function PhaseIndicator({ phase }: { phase: string }) {
       })}
     </div>
   );
-}
+});
 
 export function DemoAmbient() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      <motion.div
-        className="demo-ambient-glow absolute left-1/2 top-[55%] h-[min(100vw,800px)] w-[min(130vw,1100px)] -translate-x-1/2 -translate-y-1/2"
-        animate={{ opacity: [0.3, 0.7, 0.3], scale: [0.9, 1.08, 0.9] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <div className="demo-ambient-glow absolute left-1/2 top-[55%] h-[min(100vw,800px)] w-[min(130vw,1100px)] -translate-x-1/2 -translate-y-1/2" />
       <div className="demo-grid absolute inset-0" />
     </div>
   );

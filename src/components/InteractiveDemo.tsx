@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "../lib/motion";
 
 import { RotateCcw } from "lucide-react";
 
@@ -86,13 +86,11 @@ function MockEditor({ showCaret, dimmed }: { showCaret: boolean; dimmed?: boolea
 
   return (
 
-    <motion.div
+    <div
 
-      className="flex h-full min-h-[480px] font-mono text-sm leading-relaxed lg:text-[15px]"
+      className="flex h-full min-h-[480px] font-mono text-sm leading-relaxed transition-opacity duration-300 lg:text-[15px]"
 
-      animate={{ opacity: dimmed ? 0.45 : 1 }}
-
-      transition={{ duration: 0.35 }}
+      style={{ opacity: dimmed ? 0.45 : 1 }}
 
     >
 
@@ -172,7 +170,7 @@ function MockEditor({ showCaret, dimmed }: { showCaret: boolean; dimmed?: boolea
 
       </div>
 
-    </motion.div>
+    </div>
 
   );
 
@@ -184,7 +182,7 @@ function CaptureBar({
 
   visible,
 
-  text,
+  phase,
 
   showContext,
 
@@ -198,7 +196,7 @@ function CaptureBar({
 
   visible: boolean;
 
-  text: string;
+  phase: Phase;
 
   showContext: boolean;
 
@@ -209,6 +207,54 @@ function CaptureBar({
   fromVoice?: boolean;
 
 }) {
+
+  const [typedLen, setTypedLen] = useState(0);
+
+  useEffect(() => {
+
+    if (phase === "typing") {
+
+      setTypedLen(0);
+
+      const interval = setInterval(() => {
+
+        setTypedLen((c) => {
+
+          if (c >= CAPTURE_TEXT.length) {
+
+            clearInterval(interval);
+
+            return c;
+
+          }
+
+          return c + 1;
+
+        });
+
+      }, 46);
+
+      return () => clearInterval(interval);
+
+    }
+
+    if (["context", "submit", "linger"].includes(phase)) {
+
+      setTypedLen(CAPTURE_TEXT.length);
+
+      return;
+
+    }
+
+    if (phase === "capture-in") {
+
+      setTypedLen(0);
+
+    }
+
+  }, [phase]);
+
+  const text = CAPTURE_TEXT.slice(0, typedLen);
 
   return (
 
@@ -230,27 +276,19 @@ function CaptureBar({
 
         >
 
-          <motion.div
+          <div
 
-            className={`flex items-center gap-3 rounded-2xl border border-app-stroke border-t-[3px] border-t-app-accent bg-app-surface/98 px-4 py-3 backdrop-blur-md sm:px-5 sm:py-3.5 ${
+            className={`flex items-center gap-3 rounded-2xl border border-app-stroke border-t-[3px] border-t-app-accent bg-app-surface/98 px-4 py-3 backdrop-blur-md transition-transform duration-600 sm:px-5 sm:py-3.5 ${
 
-              glowing ? "capture-bar-glow" : ""
+              glowing ? "capture-bar-glow capture-bar-glow-pulse" : ""
 
             }`}
 
-            animate={glowing ? { scale: [1, 1.01, 1] } : {}}
-
-            transition={{ duration: 0.6 }}
-
           >
 
-            <motion.span
+            <span
 
-              className={`h-2 w-2 shrink-0 rounded-full ${fromVoice ? "bg-app-idea" : "bg-app-accent"}`}
-
-              animate={{ opacity: [1, 0.4, 1] }}
-
-              transition={{ duration: 1, repeat: Infinity }}
+              className={`capture-dot-pulse h-2 w-2 shrink-0 rounded-full ${fromVoice ? "bg-app-idea" : "bg-app-accent"}`}
 
             />
 
@@ -300,7 +338,7 @@ function CaptureBar({
 
             </AnimatePresence>
 
-          </motion.div>
+          </div>
 
         </motion.div>
 
@@ -548,21 +586,11 @@ function useDemoTimeline(enabled: boolean, onCycle: () => void) {
 
   const [stepIndex, setStepIndex] = useState(0);
 
-  const [typedChars, setTypedChars] = useState(0);
-
-  const typingRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-
-
   const reset = useCallback(() => {
-
-    if (typingRef.current) clearInterval(typingRef.current);
 
     setPhase("editor");
 
     setStepIndex(0);
-
-    setTypedChars(0);
 
   }, []);
 
@@ -586,45 +614,11 @@ function useDemoTimeline(enabled: boolean, onCycle: () => void) {
 
     setPhase(step.phase);
 
-    if (step.phase === "typing") {
-
-      setTypedChars(0);
-
-      const interval = setInterval(() => {
-
-        setTypedChars((c) => {
-
-          if (c >= CAPTURE_TEXT.length) {
-
-            clearInterval(interval);
-
-            return c;
-
-          }
-
-          return c + 1;
-
-        });
-
-      }, 46);
-
-      typingRef.current = interval;
-
-    }
-
     const timer = setTimeout(() => setStepIndex((i) => i + 1), step.duration);
 
     return () => {
 
       clearTimeout(timer);
-
-      if (typingRef.current) {
-
-        clearInterval(typingRef.current);
-
-        typingRef.current = null;
-
-      }
 
     };
 
@@ -632,7 +626,7 @@ function useDemoTimeline(enabled: boolean, onCycle: () => void) {
 
 
 
-  return { phase, typedChars, reset };
+  return { phase, reset };
 
 }
 
@@ -650,17 +644,29 @@ export function InteractiveDemo() {
 
 
 
+  const intersectingRef = useRef(false);
+
+
+
   useEffect(() => {
 
     const el = containerRef.current;
 
     if (!el) return;
 
+    const syncPlaying = () => {
+
+      setPlaying(intersectingRef.current && !document.hidden && !reduced);
+
+    };
+
     const obs = new IntersectionObserver(
 
       ([entry]) => {
 
-        if (entry.isIntersecting && !reduced) setPlaying(true);
+        intersectingRef.current = entry.isIntersecting;
+
+        syncPlaying();
 
       },
 
@@ -670,7 +676,17 @@ export function InteractiveDemo() {
 
     obs.observe(el);
 
-    return () => obs.disconnect();
+    const onVisibility = () => syncPlaying();
+
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+
+      obs.disconnect();
+
+      document.removeEventListener("visibilitychange", onVisibility);
+
+    };
 
   }, [reduced]);
 
@@ -678,7 +694,7 @@ export function InteractiveDemo() {
 
   const handleCycle = useCallback(() => setCycle((c) => c + 1), []);
 
-  const { phase, typedChars, reset } = useDemoTimeline(playing && !reduced, handleCycle);
+  const { phase, reset } = useDemoTimeline(playing && !reduced, handleCycle);
 
 
 
@@ -731,8 +747,6 @@ export function InteractiveDemo() {
   const showLogoScene = phase === "logo" || phase === "pause";
 
   const showNotify = phase === "notify" || showLogoScene;
-
-  const typedText = CAPTURE_TEXT.slice(0, typedChars);
 
 
 
@@ -804,7 +818,7 @@ export function InteractiveDemo() {
 
 
 
-              <div className="relative h-[540px] shrink-0" style={{ perspective: 1400 }}>
+              <div className="demo-stage-root relative h-[540px] shrink-0" style={{ perspective: 1400 }}>
 
                 <HotkeyRipple visible={showHotkey} />
 
@@ -832,7 +846,7 @@ export function InteractiveDemo() {
 
                         key="editor-scene"
 
-                        className="absolute inset-0 h-full"
+                        className="demo-scene-layer absolute inset-0 h-full"
 
                         variants={sceneVariants}
 
@@ -860,7 +874,7 @@ export function InteractiveDemo() {
 
                               visible={showCapture}
 
-                              text={typedText}
+                              phase={phase}
 
                               showContext={showContext}
 
@@ -888,7 +902,7 @@ export function InteractiveDemo() {
 
                         key="app-scene"
 
-                        className="absolute inset-0 h-full"
+                        className="demo-scene-layer absolute inset-0 h-full"
 
                         variants={sceneVariants}
 
@@ -928,7 +942,7 @@ export function InteractiveDemo() {
 
                         key="logo-scene"
 
-                        className="absolute inset-0 h-full"
+                        className="demo-scene-layer absolute inset-0 h-full"
 
                         variants={sceneVariants}
 
