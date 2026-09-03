@@ -134,6 +134,7 @@
 
     scroll-behavior: smooth;
     scroll-snap-type: y proximity;
+    scroll-padding-top: 4.5rem;
 
   }
 
@@ -403,6 +404,204 @@
 
   .capture-bar-glow-pulse {
     animation: capture-bar-glow-pulse 0.6s ease-in-out;
+  }
+
+  .vision-card {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 24px 60px -20px rgba(0, 0, 0, 0.45);
+  }
+
+  .vision-card-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.35) 45%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+
+  .vision-banner {
+    contain: layout style paint;
+  }
+
+  /* Learn more — text-first editorial section */
+  .learn-more {
+    contain: layout style paint;
+  }
+
+  .learn-more-ambient {
+    background:
+      radial-gradient(ellipse 55% 45% at 20% 30%, rgba(98, 104, 232, 0.07), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(98, 104, 232, 0.05), transparent 70%);
+    animation: learn-ambient-shift 14s ease-in-out infinite alternate;
+  }
+
+  .learn-more-emphasis {
+    position: relative;
+  }
+
+  .learn-more-emphasis::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.06em;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: learn-emphasis-line 1s 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .learn-more-ghost {
+    position: absolute;
+    max-width: 11rem;
+    font-family: ui-monospace, monospace;
+    font-size: clamp(0.65rem, 1.35vw, 0.8rem);
+    line-height: 1.35;
+    color: var(--muted);
+    opacity: 0;
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.06);
+    animation: learn-ghost-drift 9s ease-in-out infinite;
+  }
+
+  .learn-more-ghost-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .learn-more-ghost-strike {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 1px;
+    width: 0;
+    background: var(--muted);
+    opacity: 0.6;
+    animation: learn-ghost-strike 9s ease-in-out infinite;
+    animation-delay: var(--ghost-delay, 0s);
+  }
+
+  .learn-more-beat {
+    position: relative;
+    overflow: hidden;
+    transition:
+      border-color 0.25s,
+      box-shadow 0.25s;
+  }
+
+  .learn-more-beat::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: center top;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .learn-more-beat:hover::before {
+    transform: scaleY(1);
+  }
+
+  .learn-more-beat:hover {
+    border-color: rgba(98, 104, 232, 0.35);
+    box-shadow: 0 12px 32px -16px rgba(98, 104, 232, 0.35);
+  }
+
+  @keyframes learn-ambient-shift {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(2%, -1.5%) scale(1.04);
+    }
+  }
+
+  @keyframes learn-emphasis-line {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes learn-ghost-drift {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translateY(6px) rotate(-3deg);
+    }
+    12%,
+    58% {
+      opacity: 0.4;
+    }
+    75% {
+      opacity: 0.18;
+      transform: translateY(-14px) rotate(2deg);
+    }
+  }
+
+  @keyframes learn-ghost-strike {
+    0%,
+    28% {
+      width: 0;
+      opacity: 0;
+    }
+    40%,
+    58% {
+      width: 100%;
+      opacity: 0.7;
+    }
+    72%,
+    100% {
+      width: 100%;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .learn-more-ambient,
+    .learn-more-ghost,
+    .learn-more-ghost-strike {
+      animation: none;
+    }
+
+    .learn-more-ghost {
+      display: none;
+    }
+
+    .learn-more-emphasis::after {
+      transform: scaleX(1);
+      animation: none;
+    }
+  }
+
+  .vision-section {
+    contain: layout style paint;
+  }
+
+  .vision-panel-overlay {
+    background: linear-gradient(
+      165deg,
+      rgba(11, 12, 15, 0.55) 0%,
+      rgba(11, 12, 15, 0.4) 40%,
+      rgba(11, 12, 15, 0.65) 100%
+    );
+  }
+
+  .vision-panel:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -4px;
+  }
+
+  .dark .vision-card {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 28px 70px -24px rgba(0, 0, 0, 0.65);
   }
 }
 

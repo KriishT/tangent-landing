@@ -1,6 +1,7 @@
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { InteractiveDemo } from "./components/InteractiveDemo";
+import { LearnMore } from "./components/LearnMore";
 import { Problem } from "./components/Problem";
 import { HowItWorks } from "./components/HowItWorks";
 import { WhoItsFor } from "./components/WhoItsFor";
@@ -18,6 +19,7 @@ export default function App() {
       <main>
         <Hero />
         <InteractiveDemo />
+        <LearnMore />
 
         <SectionGroup>
           <SectionBlock id="problem">
