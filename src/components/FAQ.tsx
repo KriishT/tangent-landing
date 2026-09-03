@@ -8,11 +8,11 @@ const faqs = [
   },
   {
     q: "Is there a Mac version?",
-    a: "Yes — Apple Silicon (M1/M2/M3+) macOS 10.15+. Open the .dmg, drag Tangent into Applications, then eject the disk image. Do not run it from the DMG. First launch: right-click Tangent → Open → Open. If macOS says it is “damaged,” that is Gatekeeper on an unsigned build — in Terminal run: xattr -cr /Applications/Tangent.app — then open again.",
+    a: "Yes — Apple Silicon (M1/M2/M3+) macOS 10.15+. Open the .dmg, drag Tangent into Applications, eject the disk image, then open the app. If macOS blocks it, use System Settings → Privacy & Security → Open Anyway.",
   },
   {
     q: "Mac says Tangent is damaged — is the download broken?",
-    a: "No. Unsigned indie apps get this Gatekeeper message. Drag the app to Applications, eject the .dmg, then either right-click → Open, or run: xattr -cr /Applications/Tangent.app",
+    a: "No — that was a Gatekeeper bug on older unsigned builds. Download the latest release from the buttons above. To repair an already-installed copy, run in Terminal: xattr -cr /Applications/Tangent.app && codesign --force --deep --sign - /Applications/Tangent.app && open /Applications/Tangent.app",
   },
   {
     q: "Does it work offline?",
