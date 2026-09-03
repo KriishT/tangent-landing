@@ -1,7 +1,9 @@
-export const APP_VERSION = "0.1.0";
-export const INSTALLER_SIZE = "~48 MB";
+export const APP_VERSION = "1.0.1";
+export const INSTALLER_SIZE = "~126 MB";
 export const WINDOWS_DOWNLOAD_URL =
-  "https://github.com/KriishT/Tangent/releases/latest/download/Tangent_0.1.0_x64-setup.exe";
+  "https://github.com/KriishT/Tangent/releases/download/v1.0.1/Tangent_1.0.1_x64-setup.exe";
+export const MAC_DOWNLOAD_URL =
+  "https://github.com/KriishT/Tangent/releases/download/v1.0.1/Tangent_1.0.1_aarch64.dmg";
 
 export const LINKS = {
   github: "https://github.com/KriishT/Tangent",

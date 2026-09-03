@@ -1,5 +1,5 @@
 import { motion } from "../lib/motion";
-import { DownloadButton } from "./CTA";
+import { DownloadButton, MacDownloadButton } from "./CTA";
 import { useReducedMotion } from "../hooks/useTheme";
 
 const IMAGE =
@@ -47,7 +47,10 @@ export function Hero() {
         </p>
 
         <div className="mt-9 flex flex-col items-center gap-4">
-          <DownloadButton />
+          <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <DownloadButton />
+            <MacDownloadButton />
+          </div>
           <a
             href="#learn-more"
             className="text-sm text-muted underline-offset-4 transition-colors hover:text-ink hover:underline"
@@ -57,7 +60,7 @@ export function Hero() {
         </div>
 
         <p className="mt-8 font-mono text-xs uppercase tracking-widest text-muted">
-          Local-first · No account · Free on Windows
+          Local-first · No account · Free on Windows &amp; Mac
         </p>
       </motion.div>
     </section>

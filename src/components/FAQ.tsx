@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: "Is there a Mac version?",
-    a: "Not yet. Windows ships first. Leave your email above and we'll notify you when Mac is ready.",
+    a: "Yes — Apple Silicon (M1/M2/M3+) macOS 10.15+. Download the .dmg from the buttons above. On first launch, right-click the app → Open.",
   },
   {
     q: "Does it work offline?",
