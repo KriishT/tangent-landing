@@ -1,8 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "../lib/motion";
-import smartscreenMoreInfo from "../assets/install/smartscreen-more-info.png";
-import smartscreenRunAnyway from "../assets/install/smartscreen-run-anyway.png";
 
 export type DownloadPlatform = "windows" | "mac";
 
@@ -44,10 +42,10 @@ export function DownloadGuideProvider({ children }: { children: ReactNode }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 12 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              className="max-h-[88svh] w-full max-w-xl overflow-y-auto rounded-2xl border border-border bg-surface p-5 shadow-xl sm:p-7"
+              className="w-full max-w-md rounded-2xl border border-border bg-surface p-5 shadow-xl sm:p-7"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="mb-4 flex items-start justify-between gap-3">
+              <div className="mb-5 flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-medium uppercase tracking-widest text-muted">
                     Download started
@@ -86,7 +84,7 @@ export function DownloadGuideProvider({ children }: { children: ReactNode }) {
 function WindowsGuide() {
   return (
     <div className="space-y-4 text-left text-sm leading-relaxed text-muted">
-      <ol className="list-decimal space-y-2 pl-5 text-ink">
+      <ol className="list-decimal space-y-2.5 pl-5 text-ink">
         <li>Open the installer from your Downloads folder.</li>
         <li>
           If Windows shows <strong>Windows protected your PC</strong>, click{" "}
@@ -100,28 +98,6 @@ function WindowsGuide() {
         This warning appears because Tangent is not yet code-signed. It is the same installer you
         just downloaded from this site.
       </p>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <figure className="overflow-hidden rounded-xl border border-border bg-ink">
-          <img
-            src={smartscreenMoreInfo}
-            alt="Windows SmartScreen: click More info"
-            className="h-auto w-full"
-          />
-          <figcaption className="bg-surface px-3 py-2 text-xs text-muted">
-            1. Click More info
-          </figcaption>
-        </figure>
-        <figure className="overflow-hidden rounded-xl border border-border bg-ink">
-          <img
-            src={smartscreenRunAnyway}
-            alt="Windows SmartScreen: click Run anyway"
-            className="h-auto w-full"
-          />
-          <figcaption className="bg-surface px-3 py-2 text-xs text-muted">
-            2. Click Run anyway
-          </figcaption>
-        </figure>
-      </div>
     </div>
   );
 }
@@ -129,8 +105,10 @@ function WindowsGuide() {
 function MacGuide() {
   return (
     <div className="space-y-4 text-left text-sm leading-relaxed text-muted">
-      <ol className="list-decimal space-y-2 pl-5 text-ink">
-        <li>Open the downloaded <strong>.dmg</strong>.</li>
+      <ol className="list-decimal space-y-2.5 pl-5 text-ink">
+        <li>
+          Open the downloaded <strong>.dmg</strong>.
+        </li>
         <li>
           Drag <strong>Tangent</strong> into <strong>Applications</strong>.
         </li>
@@ -144,8 +122,7 @@ function MacGuide() {
         </li>
       </ol>
       <p>
-        If an older copy says the app is “damaged,” that is Gatekeeper on an unsigned build. In
-        Terminal:
+        If macOS says the app is “damaged,” run this in Terminal, then open Tangent again:
       </p>
       <code className="block overflow-x-auto rounded-lg bg-surface-raised px-3 py-2 font-mono text-[12px] text-ink">
         xattr -cr /Applications/Tangent.app
