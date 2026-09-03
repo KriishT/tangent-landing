@@ -1,13 +1,15 @@
-export const APP_VERSION = "1.0.1";
-export const INSTALLER_SIZE = "~126 MB";
-export const WINDOWS_DOWNLOAD_URL =
+export const GITHUB_REPO = "KriishT/Tangent";
+
+/** Fallback if the GitHub API is unreachable — keep in sync with the last known good release. */
+export const FALLBACK_VERSION = "1.0.1";
+export const FALLBACK_WINDOWS_URL =
   "https://github.com/KriishT/Tangent/releases/download/v1.0.1/Tangent_1.0.1_x64-setup.exe";
-export const MAC_DOWNLOAD_URL =
+export const FALLBACK_MAC_URL =
   "https://github.com/KriishT/Tangent/releases/download/v1.0.1/Tangent_1.0.1_aarch64.dmg";
 
 export const LINKS = {
-  github: "https://github.com/KriishT/Tangent",
-  changelog: "https://github.com/KriishT/Tangent/releases",
+  github: `https://github.com/${GITHUB_REPO}`,
+  changelog: `https://github.com/${GITHUB_REPO}/releases`,
   privacy: "#privacy",
   contact: "mailto:hello@tangent.app",
 } as const;

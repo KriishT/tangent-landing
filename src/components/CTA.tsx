@@ -1,17 +1,35 @@
+import { useEffect, useState } from "react";
 import { motion } from "../lib/motion";
 import { Download, Apple } from "lucide-react";
 import { useReducedMotion } from "../hooks/useTheme";
-import {
-  APP_VERSION,
-  INSTALLER_SIZE,
-  WINDOWS_DOWNLOAD_URL,
-  MAC_DOWNLOAD_URL,
-} from "../lib/constants";
+import { FALLBACK_MAC_URL, FALLBACK_WINDOWS_URL } from "../lib/constants";
+import { getLatestRelease } from "../lib/latestRelease";
+
+function useLatestDownloads() {
+  const [windowsUrl, setWindowsUrl] = useState(FALLBACK_WINDOWS_URL);
+  const [macUrl, setMacUrl] = useState(FALLBACK_MAC_URL);
+
+  useEffect(() => {
+    let cancelled = false;
+    getLatestRelease().then((release) => {
+      if (cancelled) return;
+      setWindowsUrl(release.windowsUrl);
+      setMacUrl(release.macUrl);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return { windowsUrl, macUrl };
+}
 
 export function DownloadButton({ className = "" }: { className?: string }) {
+  const { windowsUrl } = useLatestDownloads();
+
   return (
     <a
-      href={WINDOWS_DOWNLOAD_URL}
+      href={windowsUrl}
       className={`inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.02] active:scale-[0.98] ${className}`}
     >
       <Download className="h-4 w-4" aria-hidden />
@@ -21,23 +39,16 @@ export function DownloadButton({ className = "" }: { className?: string }) {
 }
 
 export function MacDownloadButton({ className = "" }: { className?: string }) {
+  const { macUrl } = useLatestDownloads();
+
   return (
     <a
-      href={MAC_DOWNLOAD_URL}
+      href={macUrl}
       className={`inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-surface px-6 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-surface-raised ${className}`}
     >
       <Apple className="h-4 w-4" aria-hidden />
       Download for Mac
     </a>
-  );
-}
-
-export function DownloadMeta() {
-  return (
-    <p className="text-xs text-muted">
-      v{APP_VERSION} · {INSTALLER_SIZE} · Windows 10/11 &amp; macOS 10.15+ · free to try · no
-      account required
-    </p>
   );
 }
 
