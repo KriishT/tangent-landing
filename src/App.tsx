@@ -11,10 +11,11 @@ import { FAQ } from "./components/FAQ";
 import { FinalCTA } from "./components/FinalCTA";
 import { Footer } from "./components/Footer";
 import { SectionGroup, SectionBlock } from "./components/SectionGroup";
+import { DownloadGuideProvider } from "./components/DownloadGuide";
 
 export default function App() {
   return (
-    <>
+    <DownloadGuideProvider>
       <Nav />
       <main>
         <Hero />
@@ -51,6 +52,6 @@ export default function App() {
         <FinalCTA />
       </main>
       <Footer />
-    </>
+    </DownloadGuideProvider>
   );
 }

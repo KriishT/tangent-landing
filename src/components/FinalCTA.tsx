@@ -18,14 +18,6 @@ export function FinalCTA() {
           <DownloadButton />
           <MacDownloadButton />
         </div>
-        <p className="mt-4 text-xs text-canvas/55">
-          Mac: drag to Applications, eject the .dmg, then open. If blocked, use Privacy &amp;
-          Security → Open Anyway. If an older install says “damaged,” Terminal:{" "}
-          <code className="rounded bg-canvas/10 px-1 py-0.5 font-mono text-[11px]">
-            xattr -cr /Applications/Tangent.app && codesign --force --deep --sign -
-            /Applications/Tangent.app
-          </code>
-        </p>
       </div>
     </Section>
   );

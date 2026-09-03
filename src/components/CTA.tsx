@@ -4,6 +4,7 @@ import { Download, Apple } from "lucide-react";
 import { useReducedMotion } from "../hooks/useTheme";
 import { FALLBACK_MAC_URL, FALLBACK_WINDOWS_URL } from "../lib/constants";
 import { getLatestRelease } from "../lib/latestRelease";
+import { useDownloadGuide } from "./DownloadGuide";
 
 function useLatestDownloads() {
   const [windowsUrl, setWindowsUrl] = useState(FALLBACK_WINDOWS_URL);
@@ -26,10 +27,12 @@ function useLatestDownloads() {
 
 export function DownloadButton({ className = "" }: { className?: string }) {
   const { windowsUrl } = useLatestDownloads();
+  const openGuide = useDownloadGuide();
 
   return (
     <a
       href={windowsUrl}
+      onClick={() => openGuide("windows")}
       className={`inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.02] active:scale-[0.98] ${className}`}
     >
       <Download className="h-4 w-4" aria-hidden />
@@ -40,10 +43,12 @@ export function DownloadButton({ className = "" }: { className?: string }) {
 
 export function MacDownloadButton({ className = "" }: { className?: string }) {
   const { macUrl } = useLatestDownloads();
+  const openGuide = useDownloadGuide();
 
   return (
     <a
       href={macUrl}
+      onClick={() => openGuide("mac")}
       className={`inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-surface px-6 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-surface-raised ${className}`}
     >
       <Apple className="h-4 w-4" aria-hidden />
