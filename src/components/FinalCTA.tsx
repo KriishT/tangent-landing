@@ -1,4 +1,4 @@
-import { DownloadButton, MacDownloadButton } from "./CTA";
+import { DownloadButton, MacNotifyForm } from "./CTA";
 import { Section } from "./Section";
 
 export function FinalCTA() {
@@ -12,11 +12,11 @@ export function FinalCTA() {
           Catch the thought. Keep the flow.
         </h2>
         <p className="mt-4 text-sm text-canvas/70 sm:text-base">
-          Free to try on Windows and Mac. No account. Your data stays yours.
+          Free to try on Windows. Mac coming soon. No account. Your data stays yours.
         </p>
         <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <DownloadButton />
-          <MacDownloadButton />
+          <MacNotifyForm />
         </div>
       </div>
     </Section>
