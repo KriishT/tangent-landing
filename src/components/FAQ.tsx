@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: "Is there a Mac version?",
-    a: "Not yet — Windows is available now. Use “Mac — notify me” on the download buttons and we’ll email you when the Mac build ships.",
+    a: "Yes — Apple Silicon (M1 and later). Download the .dmg from the buttons above. Intel Macs are not in this build yet.",
   },
   {
     q: "Does it work offline?",
