@@ -132,16 +132,24 @@ function MacGuide() {
         </Step>
         <Step n={4}>Open Tangent from Applications.</Step>
         <Step n={5}>
-          If macOS blocks it: System Settings → Privacy &amp; Security →{" "}
-          <strong>Open Anyway</strong>.
+          If you see <strong>Apple could not verify Tangent</strong>, click{" "}
+          <strong>Done</strong>. Then System Settings → Privacy &amp; Security → scroll
+          down → <strong>Open Anyway</strong> → confirm.
         </Step>
         <Step n={6}>
+          Or in Finder: Control-click <strong>Tangent</strong> → <strong>Open</strong> →{" "}
+          <strong>Open</strong>.
+        </Step>
+        <Step n={7}>
           Allow <strong>Microphone</strong> (and <strong>Accessibility</strong> if focus
           doesn’t return after capture).
         </Step>
       </ol>
       <div className="space-y-2 text-muted">
-        <p>Apple Silicon only (M1 and later). If macOS says the app is “damaged,” run this, then open Tangent again:</p>
+        <p>
+          Apple Silicon only (M1 and later). Unsigned indie build — Gatekeeper will warn
+          once. If it still won’t open, run this in Terminal, then try again:
+        </p>
         <code className="block overflow-x-auto rounded-lg bg-surface-raised px-3 py-2.5 font-mono text-[12px] text-ink">
           xattr -cr /Applications/Tangent.app
         </code>
