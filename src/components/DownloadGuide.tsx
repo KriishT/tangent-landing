@@ -141,8 +141,9 @@ function MacGuide() {
           <strong>Open</strong>.
         </Step>
         <Step n={7}>
-          Allow <strong>Microphone</strong> (and <strong>Accessibility</strong> if focus
-          doesn’t return after capture).
+          Allow <strong>Microphone</strong>, <strong>Notifications</strong> (banners),
+          and <strong>Accessibility</strong>. When Chrome or Safari asks, allow Tangent
+          so page names are saved with each thought.
         </Step>
       </ol>
       <div className="space-y-2 text-muted">
