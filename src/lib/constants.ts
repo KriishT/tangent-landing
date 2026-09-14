@@ -1,11 +1,11 @@
 export const GITHUB_REPO = "KriishT/Tangent";
 
 /** Fallback if the GitHub API is unreachable — keep in sync with the last known good release. */
-export const FALLBACK_VERSION = "1.0.9";
+export const FALLBACK_VERSION = "1.0.10";
 export const FALLBACK_WINDOWS_URL =
-  "https://github.com/KriishT/Tangent/releases/download/v1.0.9/Tangent_1.0.9_x64-setup.exe";
+  "https://github.com/KriishT/Tangent/releases/download/v1.0.10/Tangent_1.0.10_x64-setup.exe";
 export const FALLBACK_MAC_URL =
-  "https://github.com/KriishT/Tangent/releases/download/v1.0.9/Tangent_1.0.9_aarch64.dmg";
+  "https://github.com/KriishT/Tangent/releases/download/v1.0.10/Tangent_1.0.10_aarch64.dmg";
 
 export const LINKS = {
   github: `https://github.com/${GITHUB_REPO}`,
