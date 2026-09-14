@@ -42,7 +42,7 @@ export function Hero() {
         </h1>
 
         <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
-          One hotkey, one line, under two seconds — with the app and file you were in saved
+          Hold one hotkey, speak, under two seconds — with the app and file you were in saved
           automatically.
         </p>
 

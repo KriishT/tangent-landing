@@ -4,8 +4,8 @@ import { IconBox } from "./IconBox";
 const points = [
   {
     icon: Shield,
-    title: "No account. No cloud. No telemetry.",
-    body: "Tangent never phones home. Your thoughts stay on your machine.",
+    title: "No account. No telemetry.",
+    body: "Thoughts stay on your machine. Optional calendar sync and update checks use the network — we don't collect usage data.",
   },
   {
     icon: Database,

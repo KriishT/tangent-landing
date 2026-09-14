@@ -786,7 +786,7 @@ export function InteractiveDemo() {
 
                   <p className="mt-2 text-sm text-muted sm:text-base">
 
-                    Hold the hotkey and speak — or type. Capture → triage → resurface.
+                    Hold the hotkey and speak. Capture → triage → resurface.
 
                   </p>
 

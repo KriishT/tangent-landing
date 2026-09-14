@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     q: "Is it free?",
-    a: "Yes — the free tier is fully usable. A one-time Pro unlock adds voice, return-to-context, and calendar export.",
+    a: "Yes. Voice, triage, reminders, and calendar export are included. No account and no paywall.",
   },
   {
     q: "Is there a Mac version?",
@@ -12,11 +12,11 @@ const faqs = [
   },
   {
     q: "Does it work offline?",
-    a: "Entirely. Tangent never needs a network connection — capture, triage, and voice all work offline.",
+    a: "Capture, triage, and on-device voice work without a network. The app checks GitHub for updates, and optional calendar sync uses the internet. We don't collect analytics.",
   },
   {
     q: "Do you see my thoughts or my screen?",
-    a: "No. Nothing leaves your machine. Context is app name + window title only — not screenshots or keystrokes.",
+    a: "No. Thoughts stay in a local SQLite file. Context is app name + window title — not screenshots or keystrokes. Calendar sync is opt-in.",
   },
   {
     q: 'What exactly is "work context"?',
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: "Will it slow my machine down?",
-    a: "Under 120 MB idle. Built with Tauri (Rust + native WebView), not bundled Chromium.",
+    a: "Built with Tauri (Rust + native WebView), not bundled Chromium — meant to stay light in the tray.",
   },
   {
     q: "What if I never sort my captures?",

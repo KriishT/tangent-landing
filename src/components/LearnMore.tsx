@@ -188,7 +188,7 @@ export function LearnMore() {
           transition={{ duration: 0.5, delay: 0.65 }}
           className="mt-4 max-w-xl text-sm leading-relaxed text-muted sm:mt-5 sm:text-base"
         >
-          One hotkey, one line — with the app and file you were in saved automatically.
+          Hold one hotkey and speak — with the app and file you were in saved automatically.
         </motion.p>
 
         <ul className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4">

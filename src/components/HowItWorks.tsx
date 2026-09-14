@@ -7,7 +7,7 @@ const steps = [
   {
     icon: Keyboard,
     title: "Capture",
-    line: "Hotkey from anywhere. Hold to speak, or type one line.",
+    line: "Hold the hotkey from anywhere and speak. Type extra thoughts in the app.",
   },
   {
     icon: Inbox,
@@ -17,7 +17,7 @@ const steps = [
   {
     icon: Layers,
     title: "Triage",
-    line: "Sort into Act, Keep, or Drop — all keyboard-driven.",
+    line: "Sort into Do Now, Do Soon, Later, Idea, or Drop — all keyboard-driven.",
   },
   {
     icon: Bell,
